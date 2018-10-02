@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>IRST | Song Li(Seanlee) Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##开篇##IRST,互关联后继树，是国内胡运发教授根据序列字符的有序性和冗余性提出的一种新型的海量全文存储,索引模型。因为刚刚写了一个关于这个的东西，暂且学习学习这是个什么东西吧。">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IRST">
+<meta property="og:url" content="http://blog.songli.us/2015/02/09/IRST/index.html">
+<meta property="og:site_name" content="Song Li(Seanlee) Blog">
+<meta property="og:description" content="##开篇##IRST,互关联后继树，是国内胡运发教授根据序列字符的有序性和冗余性提出的一种新型的海量全文存储,索引模型。因为刚刚写了一个关于这个的东西，暂且学习学习这是个什么东西吧。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.songli.us/image/20150209005007.png">
+<meta property="og:image" content="http://blog.songli.us/image/20150209005837.png">
+<meta property="og:image" content="http://blog.songli.us/image/20150209005849.png">
+<meta property="og:updated_time" content="2018-10-02T16:45:23.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IRST">
+<meta name="twitter:description" content="##开篇##IRST,互关联后继树，是国内胡运发教授根据序列字符的有序性和冗余性提出的一种新型的海量全文存储,索引模型。因为刚刚写了一个关于这个的东西，暂且学习学习这是个什么东西吧。">
+<meta name="twitter:image" content="http://blog.songli.us/image/20150209005007.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Song Li(Seanlee) Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/image/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/image/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Song Li</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">A Programmer&#39;s Life</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">home</a></li>
+                        
+                            <li><a href="/archives/">archives</a></li>
+                        
+                            <li><a href="/tags/">tags</a></li>
+                        
+                            <li><a href="/download/">download</a></li>
+                        
+                            <li><a href="/profile/">about</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ADV-Programming/">ADV Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IS/">IS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Fingerprinting/">Machine Fingerprinting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Notes/">Notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Piano-sheet/">Piano sheet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play/">Play</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Coding</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Song Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/image/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Song Li</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">A Programmer&#39;s Life</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">home</a></li>
+                
+                    <li><a href="/archives/">archives</a></li>
+                
+                    <li><a href="/tags/">tags</a></li>
+                
+                    <li><a href="/download/">download</a></li>
+                
+                    <li><a href="/profile/">about</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-IRST" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/02/09/IRST/" class="article-date">
+      <time datetime="2015-02-09T05:46:28.000Z" itemprop="datePublished">2015-02-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      IRST
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>##开篇##<br>IRST,互关联后继树，是国内胡运发教授根据序列字符的有序性和冗余性提出的一种新型的<strong>海量全文存储,索引</strong>模型。因为刚刚写了一个关于这个的东西，暂且学习学习这是个什么东西吧。<br><a id="more"></a></p>
+<p>##说明##<br>前驱后继的概念不解释了。重点是我觉得这种树很有意思。理论什么的一句都不说，直接上例子。<br><img src="/image/20150209005007.png" alt=""></p>
+<p>大体解释一下这个例子吧。全文是abcabaabc，首先从a开始，下边走第一个分支是(b,1)，表示下边一个字符是b开头的树的第一个分支，我们来到根为b的这个树，看到第一个分支是(c,1)，说明下一个是c为根的第一个分支，所以就是走到c树，看到第一个分支是(a,2)，说明下一个字符是a的第二个分支，然后我们来到了a的第二个分支，发现是(b,2)，说明下一个是b的第二个分支。以此类推。</p>
+<p>这么做有什么好处呢？我们来看看这个树首先干了什么吧。所谓<strong>互关联后继树</strong>，他就是一颗后继树。说白了呢就是标明了每个字符位置的后继位置。用二元组的方式，标出了后继字符在这个字符的第几次出现。假如说是a为根的树，下边有一个(b,2)，就说明现在这个位置，下一个字符是b，而且这个b是全文第二个b。</p>
+<p>这样子下来呢，就很容易找到某个字符一共出现了多少次（树的叶子节点的大小），以及后继结点的标号以及出现在什么位置。甚至进一步的运用，可以涉及到识别字串出现的次数。</p>
+<p>这里先说一下具体生成这棵树的方法。</p>
+<p><img src="/image/20150209005837.png" alt=""><br><img src="/image/20150209005849.png" alt=""></p>
+<p>具体代码实现的时候会有点变化。因为我在写代码的时候发现先做第四步，在前驱节点树的节点添加会更快捷方便。所以我的代码写成了这样。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">while</span>(!input.eof())&#123;</span><br><span class="line">        input &gt;&gt; <span class="type">N</span>[i].length &gt;&gt; <span class="type">N</span>[i].<span class="class"><span class="keyword">data</span>;</span></span><br><span class="line">        //添加到上一个节点树</span><br><span class="line">        <span class="keyword">if</span>(i)&#123;</span><br><span class="line">            temp = get(<span class="type">N</span>[i - <span class="number">1</span>].<span class="class"><span class="keyword">data</span>);</span></span><br><span class="line">            <span class="type">SI</span>[temp].child[<span class="type">SI</span>[temp].child.size() - <span class="number">1</span>].<span class="class"><span class="keyword">data</span> = <span class="type">N</span>[i].<span class="keyword">data</span>;</span></span><br><span class="line">            <span class="keyword">if</span>(get(<span class="type">N</span>[i].<span class="class"><span class="keyword">data</span>) != -1) <span class="type">SI</span>[temp].child[<span class="type">SI</span>[temp].child.size() - 1].pos = <span class="type">SI</span>[get(<span class="type">N</span>[<span class="title">i</span>].<span class="title">data</span>)].child.size();</span></span><br><span class="line">            <span class="keyword">else</span> <span class="type">SI</span>[temp].child[<span class="type">SI</span>[temp].child.size() - <span class="number">1</span>].pos = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        // 添加本节点树</span><br><span class="line">        <span class="keyword">if</span>(get(<span class="type">N</span>[i].<span class="class"><span class="keyword">data</span>) == -1)&#123;</span></span><br><span class="line"><span class="class">            <span class="type">TSI</span>.<span class="title">child</span>.<span class="title">clear</span>();</span></span><br><span class="line"><span class="class">            <span class="type">TSI</span>.<span class="title">id</span> = <span class="type">N</span>[<span class="title">i</span>].<span class="title">data</span>;</span></span><br><span class="line"><span class="class">            <span class="type">SI</span>[<span class="title">cnt</span> ++] = <span class="type">TSI</span>;</span></span><br><span class="line"><span class="class">        &#125;</span></span><br><span class="line"></span><br><span class="line">        temp = get(<span class="type">N</span>[i].<span class="class"><span class="keyword">data</span>);</span></span><br><span class="line">        <span class="type">TNo</span>.length = <span class="type">N</span>[i].length;</span><br><span class="line">        <span class="type">TNo</span>.<span class="class"><span class="keyword">data</span> = -1;</span></span><br><span class="line">        <span class="type">TNo</span>.pos = <span class="number">-1</span>;</span><br><span class="line">        <span class="type">SI</span>[temp].child.push_back(<span class="type">TNo</span>);</span><br><span class="line">        ++ i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个代码呐，一会会放出能运行的完整版本。先凑合看吧。</p>
+<p>##具体应用##<br>这里重点记录一个应用，就是说寻找所谓的频繁因子吧。别管这个因子是什么。能寻找出频繁存在的串。</p>
+<p>这种东西，借鉴一下一个概念，所谓SIRST，<strong>时序互关联后继树</strong>，听起来如何的高大上，其实道理很简单。就是在IRST的节点二元组(a,1)类似的东西前边，加上一个属于这个二元组的label，我们可以计算出这个label出现的次数大约多少次的串等等。</p>
+<p>好处是每个串只需要计算一次。因为我们这样子很轻松的能统计出来串出现的次数。比方说刚刚的例子，我们要统计一下ab这个串出现的次数，只需要从a开始，计算一下孩子结点中b的个数就行了。另外如果要求abc这个串出现的次数，那我们就从a开始，递归的求下去就行了。这里不多说了，从a开始，找到孩子中有b的叶子，假如说是(b,1)(b,2),我们接着去b树里边找1，2分支的，如果有c就继续递归就好了。这样统计字串个数倒是挺简单的。</p>
+<p>这里我写的示例程序，主要是解决找label出现次数多余Fmin的子串。不断的递归寻找，最后输出找到的子串以及对应的次数。</p>
+<p>目前发现这个奇怪的树的作用也就是找子串出现次数很有意思。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 100</span></span><br><span class="line"><span class="keyword">int</span> Fmin = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">int</span> pos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SIRST</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Node&gt; child;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">SIRST SI[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; cnt;++ i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(SI[i].id == data) <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">getstring</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> temp = <span class="string">""</span>,temp1 = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">while</span>(n)&#123;</span><br><span class="line">        temp1 += (n % <span class="number">10</span>) + <span class="string">'0'</span>;</span><br><span class="line">        n /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = temp1.length() - <span class="number">1</span>;i &gt;= <span class="number">0</span>;-- i)&#123;</span><br><span class="line">        temp += temp1[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getres</span><span class="params">(<span class="built_in">string</span> now, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; it, <span class="keyword">int</span> root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num_l[MAX];</span><br><span class="line">    <span class="built_in">memset</span>(num_l,<span class="number">0</span>,<span class="keyword">sizeof</span>(num_l));</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next[MAX];</span><br><span class="line">    <span class="built_in">string</span> newnow = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; it.size();++ i)&#123;</span><br><span class="line">        num_l[SI[root].child[it[i]].length] ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; MAX - <span class="number">10</span> ; ++ i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(num_l[i] &amp;&amp; (num_l[i] &gt;= Fmin))&#123;</span><br><span class="line">           newnow = now + <span class="string">"("</span>;</span><br><span class="line">           newnow += getstring(i) + <span class="string">','</span>;</span><br><span class="line">           newnow += getstring(SI[root].id) + <span class="string">')'</span>;</span><br><span class="line">           <span class="built_in">cout</span> &lt;&lt; newnow &lt;&lt; <span class="string">"  "</span> &lt;&lt; num_l[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; it.size();++ j)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = it[j];</span><br><span class="line">                <span class="keyword">if</span>(SI[root].child[temp].length == i)&#123;</span><br><span class="line">                    next[get(SI[root].child[temp].data)].push_back(SI[root].child[temp].pos);</span><br><span class="line">                    <span class="comment">//cout &lt;&lt; "pos" &lt;&lt; SI[root].child[temp].pos &lt;&lt; endl;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; cnt;++ j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(next[j].size() &gt;= Fmin)&#123;</span><br><span class="line">                    getres(newnow, next[j], j);</span><br><span class="line">                &#125;</span><br><span class="line">                next[j].clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    Node N[<span class="number">1000</span>],TNo;</span><br><span class="line">    SIRST TSI;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">int</span> temp1;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Please input the Fmin\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;Fmin);</span><br><span class="line">    ifstream input;</span><br><span class="line">    input.open(<span class="string">"in.txt"</span>);</span><br><span class="line">    <span class="comment">//freopen("out.txt","w",stdout);</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//算法一</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!input.eof())&#123;</span><br><span class="line">        input &gt;&gt; N[i].length &gt;&gt; N[i].data;</span><br><span class="line">        <span class="comment">//添加到上一个节点树</span></span><br><span class="line">        <span class="keyword">if</span>(i)&#123;</span><br><span class="line">            temp = get(N[i - <span class="number">1</span>].data);</span><br><span class="line">            SI[temp].child[SI[temp].child.size() - <span class="number">1</span>].data = N[i].data;</span><br><span class="line">            <span class="keyword">if</span>(get(N[i].data) != <span class="number">-1</span>) SI[temp].child[SI[temp].child.size() - <span class="number">1</span>].pos = SI[get(N[i].data)].child.size();</span><br><span class="line">            <span class="keyword">else</span> SI[temp].child[SI[temp].child.size() - <span class="number">1</span>].pos = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加本节点树</span></span><br><span class="line">        <span class="keyword">if</span>(get(N[i].data) == <span class="number">-1</span>)&#123;</span><br><span class="line">            TSI.child.clear();</span><br><span class="line">            TSI.id = N[i].data;</span><br><span class="line">            SI[cnt ++] = TSI;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        temp = get(N[i].data);</span><br><span class="line">        TNo.length = N[i].length;</span><br><span class="line">        TNo.data = <span class="number">-1</span>;</span><br><span class="line">        TNo.pos = <span class="number">-1</span>;</span><br><span class="line">        SI[temp].child.push_back(TNo);</span><br><span class="line">        ++ i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; cnt;++ i)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,SI[i].id);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; SI[i].child.size();++ j)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"(%d,%d,%d) "</span>,SI[i].child[j].length,SI[i].child[j].data,SI[i].child[j].pos == <span class="number">-1</span> ? <span class="number">-1</span> : (SI[i].child[j].pos + <span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//算法二</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; VTemp;</span><br><span class="line">    <span class="built_in">string</span> STemp = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; cnt;++ i)&#123;</span><br><span class="line">        VTemp.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; SI[i].child.size();++ j)&#123;</span><br><span class="line">            VTemp.push_back(j);</span><br><span class="line">        &#125;</span><br><span class="line">        getres(STemp,VTemp,i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如有问题，欢迎提出。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2015/02/09/IRST/">IRST</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Song Li</a></p>
+        <p><span>Created:</span>2015-02-09, 00:46:28</p>
+        <p><span>Updated:</span>2018-10-02, 12:45:23</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2015/02/09/IRST/" title="IRST">http://blog.songli.us/2015/02/09/IRST/</a>
+            <span class="copy-path" data-clipboard-text="From http://blog.songli.us/2015/02/09/IRST/　　By Song Li" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">
+                    蚁群算法及其在列车解体顺序编排的应用
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/02/03/Minimumdominatingset/">
+                    Minimum Dominating Set
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"IRST　| Song Li(Seanlee) Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/02/09/IRST/" data-title="IRST" data-url="http://blog.songli.us/2015/02/09/IRST/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"songlius"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/" title="Pre: 蚁群算法及其在列车解体顺序编排的应用">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/02/03/Minimumdominatingset/" title="Next: Minimum Dominating Set">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/convert-sorted-list-to-binary-search-tree/">convert sorted list to binary search tree</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/all-in-one-figure/">all in one figure</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/02/With-or-Without-Antialiasing/">With or Without Antialiasing</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/Gradient-Experiment-about-textures/">Gradient Experiment about textures</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/2016-4-26/">2016_4_26</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/Get-Edge-And-Subtract/">Get Edge And Subtract</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/Try-to-use-Alpha/">Try to use Alpha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/Feb2528/">Feb25-28</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/02/PianosheetofDeborahsTheme/">Piano sheet of Deborah's Theme</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeMissingNumber/">leetcode Missing Number</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeUglyNumberII/">leetcode Ugly Number II</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/21/TowerofHanoi/">Tower of Hanoi</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/HeapinsertionanddeletioninC/">Heap insertion and deletion in C</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/verybasichashtable/">Very basic hashtable</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Quicksort/">Quicksort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Heapsort/">Heapsort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/DistanceCalculatorGUI/">Distance Calculator GUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/SortListusemergesort/">Sort List use merge sort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/07/Matrixinvert/">Matrix invert</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/06/SimpleNetwork/">Simple Network</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Myfmt/">Myfmt</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/MaximalSquare/">Maximal Square</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/CountCompleteTreeNodes/">Count Complete Tree Nodes</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/31/U6dd8U5b9dU7a0bU5e8fU5458U7684U7ecfU5386/">淘宝程序员的经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/05/U6700U5c0fU5272/">最小割</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/23/U5230U53d1U7ebfU8bbeU8ba1U9057U4f20U7b97U6cd5/">到发线设计遗传算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/06/2048/">2048</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/05/Stackoverflow/">Stackoverflow</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">蚁群算法及其在列车解体顺序编排的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/09/IRST/">IRST</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/03/Minimumdominatingset/">Minimum Dominating Set</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/12/13/ab/">a+b</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/01/U79cb/">秋</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/31/exeprogram/">exe程序捆绑运行的设计实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/27/U6495U626fU81eaU5df1/">撕扯自己</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/06/U796dU5960/">祭奠</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Song Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74687031-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

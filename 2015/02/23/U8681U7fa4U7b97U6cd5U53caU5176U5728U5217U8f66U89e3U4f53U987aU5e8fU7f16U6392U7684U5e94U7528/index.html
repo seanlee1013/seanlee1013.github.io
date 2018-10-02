@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>蚁群算法及其在列车解体顺序编排的应用 | Song Li(Seanlee) Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##基本原理的了解##首先我们来说一下蚁群算法。在看本文之前，大家需要先看一下百度百科关于蚁群算法的初步讲解。真正的蚁群算法和自然界的蚂蚁寻找食物是有很大差异的。但是了解大自然蚂蚁的寻找规律是很有必要的。">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蚁群算法及其在列车解体顺序编排的应用">
+<meta property="og:url" content="http://blog.songli.us/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/index.html">
+<meta property="og:site_name" content="Song Li(Seanlee) Blog">
+<meta property="og:description" content="##基本原理的了解##首先我们来说一下蚁群算法。在看本文之前，大家需要先看一下百度百科关于蚁群算法的初步讲解。真正的蚁群算法和自然界的蚂蚁寻找食物是有很大差异的。但是了解大自然蚂蚁的寻找规律是很有必要的。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.songli.us/image/20150223234503.png">
+<meta property="og:image" content="http://blog.songli.us/image/20150224.png">
+<meta property="og:updated_time" content="2018-10-02T16:45:23.817Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="蚁群算法及其在列车解体顺序编排的应用">
+<meta name="twitter:description" content="##基本原理的了解##首先我们来说一下蚁群算法。在看本文之前，大家需要先看一下百度百科关于蚁群算法的初步讲解。真正的蚁群算法和自然界的蚂蚁寻找食物是有很大差异的。但是了解大自然蚂蚁的寻找规律是很有必要的。">
+<meta name="twitter:image" content="http://blog.songli.us/image/20150223234503.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Song Li(Seanlee) Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/image/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/image/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Song Li</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">A Programmer&#39;s Life</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">home</a></li>
+                        
+                            <li><a href="/archives/">archives</a></li>
+                        
+                            <li><a href="/tags/">tags</a></li>
+                        
+                            <li><a href="/download/">download</a></li>
+                        
+                            <li><a href="/profile/">about</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ADV-Programming/">ADV Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IS/">IS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Fingerprinting/">Machine Fingerprinting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Notes/">Notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Piano-sheet/">Piano sheet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play/">Play</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Coding</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Song Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/image/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Song Li</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">A Programmer&#39;s Life</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">home</a></li>
+                
+                    <li><a href="/archives/">archives</a></li>
+                
+                    <li><a href="/tags/">tags</a></li>
+                
+                    <li><a href="/download/">download</a></li>
+                
+                    <li><a href="/profile/">about</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/" class="article-date">
+      <time datetime="2015-02-24T04:36:00.000Z" itemprop="datePublished">2015-02-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      蚁群算法及其在列车解体顺序编排的应用
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>##基本原理的了解##<br>首先我们来说一下蚁群算法。在看本文之前，大家需要先看一下百度百科关于蚁群算法的初步讲解。真正的蚁群算法和自然界的蚂蚁寻找食物是有很大差异的。但是了解大自然蚂蚁的寻找规律是很有必要的。<br><a id="more"></a></p>
+<p>##蚁群算法和大自然蚂蚁寻找食物的区别##<br>大自然中，蚂蚁在寻找食物的时候，会留下自己的信息素。同时每个蚂蚁个体更倾向于朝着信息素更加浓的方向走（这是一个概率问题，越浓的方向被选择的概率越大）。同时由于两点之间，一定的时间内越短的道路通过的蚂蚁越多，所以越短的道路留下的信息素也越多。直到最后这个信息素浓度特别的浓，大家走有极大地概率往这个方向走。<br><img src="/image/20150223234503.png" alt=""><br>上边这张图来自于百度百科。我想说明的一点是，蚂蚁并不知道自己走过的路程是短还是长（我了解这一点也是通过我的女票囧）。他们只需要按照信息素的浓度找吃的就可以了。因为如上图，最开始的时候，两边一样多的信息素浓度。但是A侧更短，所以A侧的会先到达目的地。因此一定时间内能够通过的蚂蚁更多。所以信息素浓度就大。<br>但是我们设计的蚁群算法不是这样的。我们是根据不同蚂蚁走过的道路的距离来决定信息素的多少的。这只蚂蚁走过的总路程最短，那么它释放的信息素就更多。我们只能通过距离的长短来设计信息素的多少，而不是通过蚂蚁先后到达来体现信息素。</p>
+<p>##蚁群算法的基本流程##<br>总体来说每一轮蚁群算法的迭代有这么几步：</p>
+<p>###放置蚂蚁###<br>以TSP（货郎担问题）为例，我们会在多个城市中随机放置蚂蚁。来作为整个程序的开始。</p>
+<p>###选择概率的更新###<br>对于每一只蚂蚁的当前位置，我们需要根据信息素浓度来判定下一个城市的选择概率，然后根据概率进行下一个城市的选择。这里大有文章可做，我们可以结合信息素浓度，以及自己设计的各种启发函数，来确定下一个城市的选择概率。</p>
+<p>###下一个城市的选择###<br>对于每一只蚂蚁，我们可以根据上一步的概率来选择下一个城市。同时进行操作，诸如已选城市标记，选择好的数据处理等等。</p>
+<p>###信息素的更新###<br>这一步是在所有的蚂蚁完成该轮循环之后做的事情。我们对于每只旅行完毕的蚂蚁的每一段旅程进行信息素更新。更新的依据就是它走过的路程长短。这里把路程长短转化为信息素浓度也是需要设计。常用的有基于平均数的设计（短于平均长度的路程信息素加一些，长于平均长度的蚂蚁对应的路程信息素减一些）。对于经过的每一段旅程进行更新完毕之后，城市两两之间的选择信息素浓度就有了。</p>
+<p>##货郎担问题的基本实现##<br>首先由几点要说一下：</p>
+<p>###关于$\rho$这个元素###<br>我们知道，如果信息素不耗散，会有什么后果呢。理论一点的说就是算法收敛速度过快，陷入局部最优解中。为什么会出现这种现象呢。是因为为了让更多的蚂蚁去有更大的概率选择一些新的道路，或者说让最近的一次迭代起到的作用更大，我们需要削弱以前几次迭代的结果。这个在大自然中表现为蚂蚁留下的信息素会不断的被风吹走，我们在算法中呢，也就是代码中的rou，就是用来形容以前的信息素信息被吹走的。看看代码就可以了。</p>
+<p>###关于代码中详细的表示###<br>本人不敢妄加修改代码，只好大体说一下各个函数以及变量的意义。<br>首先ant类是用来表示每只蚂蚁的行动的。函数名称对照我上边所说的几个过程就可以看懂了。<br>project类是用来描述整个的算法进程的。也是很容易明白。会点c++语言的基本都能看懂。<br>具体的Q啦，alpha啦，这些都是具体算法设计的内容。我没有作TSP的相关研究。这些都是可以自己设计的。我就暂且不说了。</p>
+<p>###代码###<br>代码在最后边放着。我先说列车解体问题的具体应用了。</p>
+<p>##列车解题顺序编排的应用##<br>这个问题大体来说是这样的。我们知道我们做的火车是由很多车节组成的。每个出发列车的车节都是由到达列车拆分然后组装出来的。所以我们要解决的问题就是，如果每个时间只能有一辆列车被拆分，在每个出发列车时间确定的情况下，怎样的拆分顺序是能够弄出更多的出发列车呢。</p>
+<p>具体来说，每个到达列车有a,b,c,d四个方向不同的车节，每个出发列车也有四个方向车节的要求。同时每个到达列车有自己的解体时间，出发列车组装也需要时间。具体如下表：<br><img src="/image/20150224.png" alt=""></p>
+<p>因为如果我们需要对每个到达列车进行顺序编排的话，就有n!种排序方式。这个很明显是NP完全问题了。用蚁群算法优化一下或许是一个不错的选择。</p>
+<p>首先我们是需要把所有列车都解体的。只不过是顺序问题。所以我们就映射到了TSP问题当中，TSP需要走遍所有的城市，只不过是顺序问题罢了。<br>接下来我们可以用出发列车作为时间限制进行优化，比方说第一个出发列车，在这个列车出发前，我们有几辆列车已经到位了，所以这个时候在第一辆发车之前，我们只能选择已经到达的这几辆列车解体。凑够第一辆出发列车之后，我们在考虑第二辆列车。这样的话我们就缩小了搜索范围，提升了效率。<br>我们需要给每个蚂蚁设计一个时间戳，描述当前这只蚂蚁走到了什么时间。如果超过了当前列车出发时间还没有凑齐，那么这只蚂蚁就废了。success这个元素就标记成0.<br>每次添加城市（也就是具体问题中的选择新的列车），我们都要在这个蚂蚁的时间戳上更新时间。如果是很早以前就到了的列车，我们加上解体时间就好，如果是还没到的列车，我们需要等列车到了，再加上解体时间。然后在蚂蚁的列车库中先添加这个解体列车的列车节数，然后检查是不是凑够了当前出发列车需要的节数。如果凑够了就在蚂蚁车库中去除列车节数，否则就继续。<br>程序员都知道，当然这个列车问题有很多其他的设计细节，细节决定成败。详细说清楚的话很费力。有兴趣的看看代码，不懂再联系。</p>
+<p>##代码部分##</p>
+<p>###传统TSP###<br>这个代码是直接从网上粘过来的。来自于fashionxu.blogchina.com<br>这个代码是我自己调试通过了的。有什么疑问留言就好。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> iAntCount=<span class="number">10</span>;<span class="comment">//ant numbers</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> iCityCount=<span class="number">48</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> iItCount=<span class="number">5000</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Q=<span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> alpha=<span class="number">3.0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> beta=<span class="number">5.0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> rou=<span class="number">0.9</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> rain=<span class="number">0.022</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> q0=<span class="number">0.3</span>;</span><br><span class="line"><span class="keyword">int</span> besttour[iCityCount+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span>  <span class="title">rnd</span><span class="params">(<span class="keyword">int</span> low,<span class="keyword">int</span> uper)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> p=(rand()/(<span class="keyword">double</span>)RAND_MAX)*((uper)-(low))+(low);<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> (p);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rnd</span><span class="params">(<span class="keyword">int</span> uper)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (rand()%uper);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GInfo</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> m_dDeltTrial[iCityCount][iCityCount];</span><br><span class="line">	<span class="keyword">double</span> m_dTrial[iCityCount][iCityCount];</span><br><span class="line">	<span class="keyword">double</span> distance[iCityCount][iCityCount];</span><br><span class="line">&#125;Map;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ant</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">double</span> prob[iCityCount];</span><br><span class="line">	<span class="keyword">int</span> m_iTopCity;</span><br><span class="line">	<span class="keyword">int</span> allowed[iCityCount];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ChooseNextCity</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">UpdateProb</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> m_dLength;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> visited[iCityCount+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">	ant();</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">addcity</span><span class="params">(<span class="keyword">int</span> city)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Clear</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">UpdateLength</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//void move2last();</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ant::ant()</span><br><span class="line">&#123;</span><br><span class="line">	m_dLength=<span class="number">0</span>;</span><br><span class="line">	m_iTopCity=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		prob[i]=<span class="number">0.5</span>;</span><br><span class="line">		allowed[i]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> ant::addcity(<span class="keyword">int</span> city)</span><br><span class="line">&#123;<span class="comment">//add city to tabu;</span></span><br><span class="line">	visited[m_iTopCity]=city;</span><br><span class="line">	m_iTopCity++;</span><br><span class="line">	allowed[city]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> ant::UpdateProb()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">double</span> temp=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> curCity=visited[m_iTopCity<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">int</span> c=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(allowed[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">double</span> p=<span class="built_in">pow</span>((<span class="number">1.0</span>/Map.distance[curCity][i]),beta)*<span class="built_in">pow</span>((Map.m_dTrial[curCity][i]),alpha);</span><br><span class="line">			temp+=p;</span><br><span class="line">			c++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(allowed[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp==<span class="number">0</span>)</span><br><span class="line">				prob[i]=(<span class="keyword">double</span>)<span class="number">1.0</span>/(<span class="keyword">double</span>)c;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				prob[i]=<span class="built_in">pow</span>((<span class="number">1.0</span>/Map.distance[curCity][i]),beta)*<span class="built_in">pow</span>((Map.m_dTrial[curCity][i]),alpha)/temp;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			prob[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> ant::ChooseNextCity()</span><br><span class="line">&#123;<span class="comment">//Update the probability of path selection</span></span><br><span class="line">	<span class="comment">//select a path from tabu[m_iCityCount-1] to next</span></span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">double</span> temp;</span><br><span class="line">	<span class="keyword">double</span> mRate=rnd(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> curCity=visited[m_iTopCity<span class="number">-1</span>];</span><br><span class="line"></span><br><span class="line">	UpdateProb();</span><br><span class="line">	<span class="keyword">if</span> (mRate&gt;q0)</span><br><span class="line">	&#123;</span><br><span class="line">		temp=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//temp&lt;prob[i];</span></span><br><span class="line">			<span class="keyword">if</span>(allowed[i])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">double</span> p=<span class="built_in">pow</span>((<span class="number">1.0</span>/Map.distance[curCity][i]),beta)*<span class="built_in">pow</span>((Map.m_dTrial[curCity][i]),alpha);</span><br><span class="line">				<span class="keyword">if</span> (temp&lt;p)</span><br><span class="line">				&#123;</span><br><span class="line">					temp=p;</span><br><span class="line">					j=i;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> mSelect=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			mSelect+=prob[i] ;</span><br><span class="line">			<span class="keyword">if</span> (mSelect&gt;=mRate) &#123;j=i;<span class="keyword">break</span>;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> ant::UpdateLength()</span><br><span class="line">&#123;<span class="comment">// Update the length of tour</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">		m_dLength+=Map.distance[visited[i]][visited[i+<span class="number">1</span>]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> ant::move()</span><br><span class="line">&#123;<span class="comment">//the ant move to next town and add town ID to tabu.</span></span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	j=ChooseNextCity();</span><br><span class="line">	addcity(j);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> ant::Clear()</span><br><span class="line">&#123;</span><br><span class="line">	m_dLength=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		prob[i]=<span class="number">0.5</span>;</span><br><span class="line">		allowed[i]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	i=visited[<span class="number">0</span>];</span><br><span class="line">	m_iTopCity=<span class="number">0</span>;</span><br><span class="line">	addcity(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">project</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">initmap</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">	<span class="keyword">double</span> m_dShortest;</span><br><span class="line">	ant ants[iAntCount];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">UpdateTrial</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">GetAnt</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">StartSearch</span><span class="params">()</span></span>;</span><br><span class="line">	project();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">project::project()</span><br><span class="line">&#123;<span class="comment">//initial map,read map infomation from file . et.</span></span><br><span class="line"></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">city</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="keyword">int</span>  y;</span><br><span class="line">	&#125;cc[iCityCount];</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	initmap();</span><br><span class="line"></span><br><span class="line">	m_dShortest=<span class="number">10e9</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function">ifstream <span class="title">in</span><span class="params">(<span class="string">"48.txt"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		in&gt;&gt;num&gt;&gt;cc[i].x&gt;&gt;cc[i].y;</span><br><span class="line">		besttour[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">		<span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;iCityCount;j++)</span><br><span class="line">			Map.distance[i][j]=<span class="built_in">sqrt</span>(<span class="built_in">pow</span>((cc[i].x-cc[j].x),<span class="number">2</span>)+<span class="built_in">pow</span>((cc[i].y-cc[j].y),<span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> project::initmap()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">		<span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;iCityCount;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			Map.m_dTrial[i][j]=<span class="number">1.0</span>/(<span class="keyword">double</span>)iCityCount;</span><br><span class="line">			Map.m_dDeltTrial[i][j]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> project::GetAnt()</span><br><span class="line">&#123;<span class="comment">//randomly put ant into map</span></span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> city;</span><br><span class="line">	srand( (<span class="keyword">unsigned</span>)time( <span class="literal">NULL</span> ) +rand());</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iAntCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		city=rnd(iCityCount);</span><br><span class="line">		ants[i].addcity(city);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> project::StartSearch()</span><br><span class="line">&#123;<span class="comment">//begin to find best solution</span></span><br><span class="line">	<span class="keyword">int</span> max=<span class="number">0</span>;<span class="comment">//every ant tours times</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">double</span> temp;</span><br><span class="line">	<span class="keyword">int</span> temptour[iCityCount+<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">while</span> (max&lt;iItCount)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount<span class="number">-1</span>;i++)</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;iAntCount;j++)</span><br><span class="line">				ants[j].move();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;iAntCount;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			ants[j].visited[iCityCount]=ants[j].visited[<span class="number">0</span>];</span><br><span class="line">			ants[j].UpdateLength ();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//find out the best solution of the step and put it into temp</span></span><br><span class="line">		<span class="keyword">int</span> t;</span><br><span class="line">		temp=ants[<span class="number">0</span>].m_dLength ;</span><br><span class="line">		<span class="keyword">for</span> (t=<span class="number">0</span>;t&lt;iCityCount+<span class="number">1</span>;t++)</span><br><span class="line">			temptour[t]=ants[<span class="number">0</span>].visited[t];</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;iAntCount;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (temp&gt;ants[j].m_dLength) &#123;</span><br><span class="line">				temp=ants[j].m_dLength;</span><br><span class="line">				<span class="keyword">for</span> ( t=<span class="number">0</span>;t&lt;iCityCount+<span class="number">1</span>;t++)</span><br><span class="line">					temptour[t]=ants[j].visited[t];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(temp&lt;m_dShortest)&#123;</span><br><span class="line">			m_dShortest=temp;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d : %f\n"</span>,max,m_dShortest);</span><br><span class="line">			<span class="keyword">for</span> ( t=<span class="number">0</span>;t&lt;iCityCount+<span class="number">1</span>;t++)</span><br><span class="line">				besttour[t]=temptour[t];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (max %<span class="number">100</span>==<span class="number">0</span>)<span class="built_in">printf</span>(<span class="string">" %d "</span>,max);</span><br><span class="line">		UpdateTrial();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;iAntCount;j++)</span><br><span class="line">			ants[j].Clear();</span><br><span class="line"></span><br><span class="line">		max++;</span><br><span class="line">		<span class="comment">//char c;</span></span><br><span class="line">		<span class="comment">//scanf("%c",&amp;c);</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"The shortest toure is : %f\n"</span>,m_dShortest);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> t=<span class="number">0</span>;t&lt;=iCityCount;t++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">" %d "</span>,besttour[t]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> project::UpdateTrial()</span><br><span class="line">&#123;<span class="comment">//calculate the changes of trial information</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;iCityCount;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//printf("trail is : %1.10f deltatrial is: %1.10f\n",Map.m_dTrial[i][j],Map.m_dDeltTrial[i][j]);</span></span><br><span class="line">			Map.m_dTrial[i][j]*=(<span class="number">1</span>-rou);<span class="comment">//*Map.m_dTrial[i][j]+Map.m_dDeltTrial[i][j] );</span></span><br><span class="line">			<span class="comment">//Map.m_dProb[i][j]=</span></span><br><span class="line">			<span class="comment">//Map.m_dDeltTrial[i][j]=0;</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;iAntCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;iCityCount;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			Map.m_dDeltTrial[ants[i].visited[j]][ants[i].visited[j+<span class="number">1</span>]]+=Q/ants[i].m_dLength ;</span><br><span class="line">			Map.m_dDeltTrial[ants[i].visited[j+<span class="number">1</span>]][ants[i].visited[j]]+=Q/ants[i].m_dLength;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;iCityCount;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;iCityCount;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//printf("trail is : %1.10f deltatrial is: %1.10f\n",Map.m_dTrial[i][j],Map.m_dDeltTrial[i][j]);</span></span><br><span class="line">			Map.m_dTrial[i][j]=rou*(Map.m_dTrial[i][j]+Map.m_dDeltTrial[i][j] );</span><br><span class="line">			<span class="comment">//Map.m_dProb[i][j]=</span></span><br><span class="line">			Map.m_dDeltTrial[i][j]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	project TSP;</span><br><span class="line">	TSP.GetAnt();</span><br><span class="line">	TSP.StartSearch();</span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%c"</span>,&amp;c);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+<p>输入文件叫做“48.txt”，格式如下<br><a href="/other/48.txt">48.txt</a></p>
+<p>###列车解体问题###<br>输入文件格式如下：<br>首先是到达列车的数量，然后分别写出每个列车的信息<br>然后是出发列车的数量，然后写出每个列车的信息<br><a href="/other/aco_input.txt">aco_input.txt</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">蚁群算法及其在列车解体顺序编排的应用</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Song Li</a></p>
+        <p><span>Created:</span>2015-02-23, 23:36:00</p>
+        <p><span>Updated:</span>2018-10-02, 12:45:23</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/" title="蚁群算法及其在列车解体顺序编排的应用">http://blog.songli.us/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/</a>
+            <span class="copy-path" data-clipboard-text="From http://blog.songli.us/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/　　By Song Li" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/03/05/Stackoverflow/">
+                    Stackoverflow
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/02/09/IRST/">
+                    IRST
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"蚁群算法及其在列车解体顺序编排的应用　| Song Li(Seanlee) Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/" data-title="蚁群算法及其在列车解体顺序编排的应用" data-url="http://blog.songli.us/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"songlius"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/03/05/Stackoverflow/" title="Pre: Stackoverflow">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/02/09/IRST/" title="Next: IRST">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/convert-sorted-list-to-binary-search-tree/">convert sorted list to binary search tree</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/all-in-one-figure/">all in one figure</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/02/With-or-Without-Antialiasing/">With or Without Antialiasing</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/Gradient-Experiment-about-textures/">Gradient Experiment about textures</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/2016-4-26/">2016_4_26</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/Get-Edge-And-Subtract/">Get Edge And Subtract</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/Try-to-use-Alpha/">Try to use Alpha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/Feb2528/">Feb25-28</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/02/PianosheetofDeborahsTheme/">Piano sheet of Deborah's Theme</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeMissingNumber/">leetcode Missing Number</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeUglyNumberII/">leetcode Ugly Number II</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/21/TowerofHanoi/">Tower of Hanoi</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/HeapinsertionanddeletioninC/">Heap insertion and deletion in C</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/verybasichashtable/">Very basic hashtable</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Quicksort/">Quicksort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Heapsort/">Heapsort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/DistanceCalculatorGUI/">Distance Calculator GUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/SortListusemergesort/">Sort List use merge sort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/07/Matrixinvert/">Matrix invert</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/06/SimpleNetwork/">Simple Network</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Myfmt/">Myfmt</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/MaximalSquare/">Maximal Square</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/CountCompleteTreeNodes/">Count Complete Tree Nodes</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/31/U6dd8U5b9dU7a0bU5e8fU5458U7684U7ecfU5386/">淘宝程序员的经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/05/U6700U5c0fU5272/">最小割</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/23/U5230U53d1U7ebfU8bbeU8ba1U9057U4f20U7b97U6cd5/">到发线设计遗传算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/06/2048/">2048</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/05/Stackoverflow/">Stackoverflow</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">蚁群算法及其在列车解体顺序编排的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/09/IRST/">IRST</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/03/Minimumdominatingset/">Minimum Dominating Set</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/12/13/ab/">a+b</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/01/U79cb/">秋</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/31/exeprogram/">exe程序捆绑运行的设计实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/27/U6495U626fU81eaU5df1/">撕扯自己</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/06/U796dU5960/">祭奠</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Song Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74687031-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

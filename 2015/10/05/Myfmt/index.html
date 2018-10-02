@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Myfmt | Song Li(Seanlee) Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Author: Song Li ##AIM##This program is use to do text format things. Users can use this program to limit the width of every line into a particular length and can uniform every blanks.">
+<meta name="keywords" content="ADV Programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Myfmt">
+<meta property="og:url" content="http://blog.songli.us/2015/10/05/Myfmt/index.html">
+<meta property="og:site_name" content="Song Li(Seanlee) Blog">
+<meta property="og:description" content="Author: Song Li ##AIM##This program is use to do text format things. Users can use this program to limit the width of every line into a particular length and can uniform every blanks.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.songli.us/image/20151005.jpg">
+<meta property="og:updated_time" content="2018-10-02T16:45:23.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Myfmt">
+<meta name="twitter:description" content="Author: Song Li ##AIM##This program is use to do text format things. Users can use this program to limit the width of every line into a particular length and can uniform every blanks.">
+<meta name="twitter:image" content="http://blog.songli.us/image/20151005.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Song Li(Seanlee) Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/image/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/image/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Song Li</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">A Programmer&#39;s Life</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">home</a></li>
+                        
+                            <li><a href="/archives/">archives</a></li>
+                        
+                            <li><a href="/tags/">tags</a></li>
+                        
+                            <li><a href="/download/">download</a></li>
+                        
+                            <li><a href="/profile/">about</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ADV-Programming/">ADV Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IS/">IS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Fingerprinting/">Machine Fingerprinting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Notes/">Notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Piano-sheet/">Piano sheet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play/">Play</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Coding</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Song Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/image/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Song Li</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">A Programmer&#39;s Life</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">home</a></li>
+                
+                    <li><a href="/archives/">archives</a></li>
+                
+                    <li><a href="/tags/">tags</a></li>
+                
+                    <li><a href="/download/">download</a></li>
+                
+                    <li><a href="/profile/">about</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Myfmt" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/05/Myfmt/" class="article-date">
+      <time datetime="2015-10-06T02:48:09.000Z" itemprop="datePublished">2015-10-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Myfmt
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ADV-Programming/">ADV Programming</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>Author: Song Li</p>
+<p>##AIM##<br>This program is use to do text format things. Users can use this program to limit the width of every line into a particular length and can uniform every blanks.<br><a id="more"></a></p>
+<p>##USAGE##<br>Shown as “–help”, there are two major functions:<br>-u to format the text<br>-w [length] to limit the width of a line into a<br>–h to show the help page<br>–v to show the version info</p>
+<p>##COMPILE##<br>Using</p>
+<blockquote>
+<p>gcc -o fmt.out fmt.c</p>
+</blockquote>
+<p>##FILE STRUCTURE##</p>
+<blockquote>
+<p>fmt.c: the main code of this program<br>inputjane: the inputfile that I use to test the efficiency<br>HW2 fmt readme.pdf: Document of this program</p>
+</blockquote>
+<p>##RESULT##<br>-w [length]: if the original line is longer than the number length, this line will be cut into several lines. After this operation, the maximum length of every line will be the input number “length” and<br>every new line which comes from a same original line will share the same indent just as the original line. They have the same number of leading blanks. And the words will not be separated which means if a word is right at the cut point of the original line, this word will be moved to the next line. So no word will be cut. The default length of every new line is 75.<br>-u: if there are more than one blank characters such as ‘ ’, ”\t”, some of them will be removed. The result is that between every two words there will be only one blank. After every sentence, which means there are some characters like ‘.’, ‘?’, ‘!’ shown up at the end of a sentence, there will be two blanks. After this action, the length of every line will be limited within 75 characters by default. If users input the maximum length of every line, this limitation will be the input number.</p>
+<p>##INPUT AND OUTPUT##<br>The input text must come from an input file. The result will be output as a “stdout” stream. The<br>input format are exampled here:</p>
+<blockquote>
+<p>./fmt –u –w 50 inputfile1 inputfile2 &gt; outputfile</p>
+</blockquote>
+<p>##ALGORITHM DESIGN##</p>
+<p>###Overall###<br>This program formats texts line by line. In this way, it can handle a very large file in a very small memory cost. It opens the first file, reads a single line into an array, formats it and output it into a particular file and then the next line. After handling a file, it will handle another in the same way.</p>
+<p>###Uniform function###<br>In this function, there are two strings. The first one is the original string. The second string is the new string. There will be two pointers. The first pointer points at the original string, the second one points at the new string. The first pointer, which points at the original string, always keep moving forward.<br>1) When the first pointer points at a normal character, this character will be copied to the new string, and the pointer points at the new string will move forward too.<br>2) When the first pointers points at a blank such as ‘ ’, ‘\t’, this pointer will keep moving until it points at a normal character which is not a blank character. At the same time, the second pointer will add a blank to the second string. If the last no-blank character is ‘.’, ‘?’ or ‘!’, the second pointer will add two blanks to the second string.<br>After this, the result string will be sent to the –w procession. After the –w procession, we get the final result of this line.</p>
+<p>###Width function###<br>In this function, there also are two strings and two pointers like the uniform function. In order to have a better performance, I designed an algorithm for this function.<br>1) Reset the length limitation to the original limitation minus the number of leading blanks. In this way, we can easily get the real length of characters.<br>2) The original string pointer jumps from the start position of the new line to the expected end position, which is the start position add the length limitation.<br>3)If this position is in the middle of a word, then the first pointer will move backward until the pointer finds a blank character or reaches the new start position.<br>4)If the pointer gets a blank, it will continue move backward to finds a normal character.<br>5) If the pointer reaches the new start position, it will move forward to find the end of this word.<br>6) Using “memcpy” to copy this new line which from the new start position to the end position to the aim string.<br>7) Set the new start to the position of the end position and repeat the steps from 2 to 7.</p>
+<p>###Efficiency###<br>I compared the run time of my program and the system fmt program. The data to test this two programs is a novel called “Jane Eyre”, which contains 21062 lines. Here is the result. (The time is the average time of 10 tests, using linux time function). I’m sure that the system’s fmt is much better than mine. There are lots of things that I didn’t considered like the proper real length, the dictionary and so on.</p>
+<p><img src="/image/20151005.jpg" alt=""></p>
+<p>Here is the code:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;getopt.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_LEN 10000</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">option</span> <span class="title">long_options</span>[] = &#123;</span></span><br><span class="line">    &#123;<span class="string">"help"</span>, no_argument, <span class="literal">NULL</span>, <span class="string">'h'</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"version"</span>, no_argument, <span class="literal">NULL</span>, <span class="string">'v'</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"uniform"</span>, no_argument, <span class="literal">NULL</span>, <span class="string">'u'</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"width"</span>, required_argument,<span class="literal">NULL</span>, <span class="string">'w'</span>&#125;,</span><br><span class="line">    &#123;<span class="literal">NULL</span>, no_argument, <span class="literal">NULL</span> ,<span class="number">0</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Task</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> w,u,h,v;</span><br><span class="line">    <span class="keyword">int</span> w_len;</span><br><span class="line">&#125;tasks;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">int</span> startblank = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isBlank</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> c == <span class="string">' '</span> || c == <span class="string">'\t'</span> || c == <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isFinish</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> c == <span class="string">'.'</span> || c == <span class="string">'?'</span> || c == <span class="string">'!'</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showhelp</span><span class="params">()</span></span>&#123;<span class="comment">// help info</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\nUsage: fmt [-WIDTH] [OPTION]... [FILE]...\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Format each line in the FILE(s)\n\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"  -w, --width\t\tmaximum line width (default of 75)\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"  -u, --uniform\t\tone space between words, two after sentences\n\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"      --help\t\toutput this help and exit\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"      --version\t\toutput the version and exit\n\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Report myfmt bugs to sol315@lehigh.edu\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">error</span><span class="params">(<span class="keyword">int</span> id,<span class="keyword">int</span> msg, <span class="keyword">char</span> *file)</span></span>&#123;<span class="comment">//errors</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Error from fmt: "</span>);</span><br><span class="line">    <span class="keyword">switch</span> (id)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Input file not found\n"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Input file reading error in file \"%s\" line %d.\n"</span>,file,msg);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"The -w function requires the length of the line bigger than 0\n"</span>);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Fmt requires input arguments\n"</span>);</span><br><span class="line">            showhelp();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * this function is used to do the -w work</span></span><br><span class="line"><span class="comment"> * @param </span></span><br><span class="line"><span class="comment"> *          char *ret: the address of the string that needed to be changed</span></span><br><span class="line"><span class="comment"> *          int len: the length of that string</span></span><br><span class="line"><span class="comment"> * @return  the address of the changed string</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">runw</span><span class="params">(<span class="keyword">char</span> *ret,<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[FILE_LEN] = &#123;<span class="number">0</span>&#125;;    </span><br><span class="line">    <span class="keyword">int</span> ret_len = <span class="number">0</span>;<span class="comment">//current length of the new string</span></span><br><span class="line">    <span class="keyword">int</span> jump = tasks.w_len;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(ret) == <span class="number">1</span>) <span class="keyword">return</span> ret;</span><br><span class="line">    <span class="built_in">strcpy</span>(buffer,ret);<span class="comment">//when this function finished, the "buffer" space will gone. So we use buffer to</span></span><br><span class="line">                       <span class="comment">//store the original string, use "ret" to store the new string</span></span><br><span class="line">    <span class="built_in">memset</span>(ret,<span class="number">0</span>,FILE_LEN);</span><br><span class="line">    <span class="keyword">if</span>(jump &lt;= startblank) jump = startblank + <span class="number">1</span>;<span class="comment">//if the max width smaller than startblank, this line</span></span><br><span class="line">                                                 <span class="comment">//should place one word. We set jump=startblack+1 to do that</span></span><br><span class="line">    <span class="keyword">int</span> posi = jump - <span class="number">1</span>,pre = startblank;<span class="comment">//pre means the start position of the new line in the original string. posi means the current pointer position in original string</span></span><br><span class="line">    <span class="keyword">while</span>(posi &lt; len)&#123;<span class="comment">//this means the process hasn't finished</span></span><br><span class="line">        <span class="keyword">while</span>(posi &gt; pre &amp;&amp; !isBlank(buffer[posi])) --posi;<span class="comment">//if the max width cuts a word, get the start of the word.</span></span><br><span class="line">        <span class="keyword">if</span>(posi == pre) <span class="keyword">while</span>(!isBlank(buffer[posi])) ++posi;<span class="comment">//if the first single word longer than the max width, get the end of the word.</span></span><br><span class="line">        <span class="keyword">while</span>(isBlank(buffer[-- posi]));<span class="comment">//if the position of the pointer is in blank, move backward and get the end of this line.</span></span><br><span class="line">        posi ++;</span><br><span class="line">		<span class="built_in">memset</span>(ret + ret_len, <span class="string">' '</span>, startblank);<span class="comment">//put some blanks in the start of the new line</span></span><br><span class="line">		ret_len += startblank;<span class="comment">//get the new length of the new string</span></span><br><span class="line">		<span class="built_in">memcpy</span>(ret + ret_len, buffer + pre, posi - pre);<span class="comment">//copy the line from the original string to the new one</span></span><br><span class="line">		ret_len += posi - pre;</span><br><span class="line">		ret[ret_len ++] = <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">while</span>(isBlank(buffer[posi])) ++posi;<span class="comment">//skip the blanks and get the start of next line</span></span><br><span class="line">        pre = posi;</span><br><span class="line">        posi += jump - startblank - <span class="number">1</span>;<span class="comment">//jump to the next possible cut point</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">if</span>(pre != len) &#123;<span class="comment">//this part is used to handle the last line of the string</span></span><br><span class="line">		posi = len - <span class="number">1</span>;<span class="comment">//the position of the pointer is the end of the string</span></span><br><span class="line">		<span class="keyword">while</span>(isBlank(buffer[posi])) --posi;<span class="comment">//get the last no-blank char</span></span><br><span class="line">		posi ++;</span><br><span class="line">		<span class="keyword">if</span>(posi != pre) &#123;</span><br><span class="line">			<span class="built_in">memset</span>(ret + ret_len, <span class="string">' '</span>, startblank);</span><br><span class="line">			ret_len += startblank;</span><br><span class="line">			<span class="built_in">memcpy</span>(ret + ret_len, buffer + pre, posi - pre);</span><br><span class="line">			ret_len += posi - pre;</span><br><span class="line">		&#125;</span><br><span class="line">        ret[ret_len ++] = <span class="string">'\n'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * this function is used to do the -u task</span></span><br><span class="line"><span class="comment"> * @param   buffer: the address of file </span></span><br><span class="line"><span class="comment"> *          len: the length of this file</span></span><br><span class="line"><span class="comment"> * @return  the address of the result string</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">runu</span><span class="params">(<span class="keyword">char</span>* ret,<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[FILE_LEN];</span><br><span class="line">    <span class="keyword">int</span> ret_len = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(buffer,ret);</span><br><span class="line">    <span class="built_in">memset</span>(ret, <span class="number">0</span>, FILE_LEN);<span class="comment">//end of the string</span></span><br><span class="line">	<span class="built_in">memset</span>(ret,<span class="string">' '</span>,startblank);<span class="comment">//put some blanks to the start of the new string</span></span><br><span class="line">	ret_len = startblank;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; len;)&#123;</span><br><span class="line">        <span class="keyword">if</span>(isFinish(buffer[i])) flag = <span class="number">1</span>;<span class="comment">//if this char means the end of a sentence, set flag true</span></span><br><span class="line">        <span class="keyword">if</span>(!isBlank(buffer[i])) ret[ret_len ++] = buffer[i ++];<span class="comment">//if it is a normal char, copy it </span></span><br><span class="line">        <span class="keyword">else</span>&#123;<span class="comment">//if it is a blank char</span></span><br><span class="line">            <span class="keyword">if</span>(i) ret[ret_len ++] = <span class="string">' '</span>;<span class="comment">//if it isn't the start of the string, put a ' ' in it.</span></span><br><span class="line">            <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">                ret[ret_len ++] = <span class="string">' '</span>;<span class="comment">//if it is the end of a sentence, put another blank in it.</span></span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(isBlank(buffer[++ i]));<span class="comment">//skip every blanks. using ++ i instead of i ++ can loop 1 time less</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> runw(ret,ret_len);<span class="comment">//every -u needs a -w</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getStartBlank</span><span class="params">(<span class="keyword">char</span> *buffer,<span class="keyword">int</span> len)</span></span>&#123;<span class="comment">//get the number of start blank</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; len;++ i)</span><br><span class="line">        <span class="keyword">if</span>(!isBlank(buffer[i])) </span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fmt</span><span class="params">(<span class="keyword">char</span> *filename)</span></span>&#123;</span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="keyword">char</span> buffer[FILE_LEN] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">char</span> *res;</span><br><span class="line">    <span class="keyword">int</span> linenum = <span class="number">0</span>;</span><br><span class="line">    res = buffer;</span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    fp = fopen(filename,<span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == fp)&#123;</span><br><span class="line">        error(<span class="number">1</span>,<span class="number">0</span>,<span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(fgets(buffer,FILE_LEN - <span class="number">2</span>,fp) != <span class="literal">NULL</span>)&#123;<span class="comment">//format the file line by line</span></span><br><span class="line">        len = <span class="built_in">strlen</span>(buffer);</span><br><span class="line">        linenum ++;</span><br><span class="line">        <span class="keyword">if</span>(ferror(fp)) &#123;</span><br><span class="line">            error(<span class="number">2</span>,linenum,filename);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        startblank = getStartBlank(buffer,len);</span><br><span class="line">        <span class="keyword">if</span>(tasks.u) res = runu(res,len);<span class="comment">//if we do -u, the -w has been done so "if else if"</span></span><br><span class="line">	    <span class="keyword">else</span> <span class="keyword">if</span>(tasks.w) res = runw(res,len);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s"</span>,res);</span><br><span class="line">    &#125;   </span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showversion</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"version 25\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    tasks.w = tasks.u = <span class="number">0</span>;</span><br><span class="line">    tasks.h = tasks.v = <span class="number">0</span>;</span><br><span class="line">    tasks.w_len = <span class="number">75</span>;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> **argv)</span></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">int</span> option_index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> opt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> optstring[<span class="number">4</span>] = <span class="string">"uw:"</span>;</span><br><span class="line">    <span class="keyword">char</span>** infile;</span><br><span class="line">    <span class="keyword">int</span> file_num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((opt = getopt_long(argc,argv,optstring,long_options,&amp;option_index)) != <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">switch</span> (opt)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'u'</span>: </span><br><span class="line">                tasks.u = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'w'</span>:</span><br><span class="line">                <span class="keyword">if</span>(optarg != <span class="literal">NULL</span>) tasks.w_len = atoi(optarg);</span><br><span class="line">                <span class="keyword">if</span>(tasks.w_len &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">                    error(<span class="number">3</span>,<span class="number">0</span>,<span class="literal">NULL</span>);</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                tasks.w = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'h'</span>:</span><br><span class="line">                tasks.h = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'v'</span>:</span><br><span class="line">                tasks.v = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(argc == <span class="number">1</span>) error(<span class="number">4</span>,<span class="number">0</span>,<span class="literal">NULL</span>);</span><br><span class="line">    infile = argv + optind;<span class="comment">//get the name of input files</span></span><br><span class="line">    file_num = argc - optind;<span class="comment">//get the number of input files</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; file_num;++ i)&#123;</span><br><span class="line">        fmt(infile[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(tasks.h) showhelp();</span><br><span class="line">    <span class="keyword">if</span>(tasks.v) showversion();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2015/10/05/Myfmt/">Myfmt</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Song Li</a></p>
+        <p><span>Created:</span>2015-10-05, 22:48:09</p>
+        <p><span>Updated:</span>2018-10-02, 12:45:23</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2015/10/05/Myfmt/" title="Myfmt">http://blog.songli.us/2015/10/05/Myfmt/</a>
+            <span class="copy-path" data-clipboard-text="From http://blog.songli.us/2015/10/05/Myfmt/　　By Song Li" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/10/06/SimpleNetwork/">
+                    Simple Network
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/06/07/MaximalSquare/">
+                    Maximal Square
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Myfmt　| Song Li(Seanlee) Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/10/05/Myfmt/" data-title="Myfmt" data-url="http://blog.songli.us/2015/10/05/Myfmt/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"songlius"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/10/06/SimpleNetwork/" title="Pre: Simple Network">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/06/07/MaximalSquare/" title="Next: Maximal Square">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/convert-sorted-list-to-binary-search-tree/">convert sorted list to binary search tree</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/all-in-one-figure/">all in one figure</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/02/With-or-Without-Antialiasing/">With or Without Antialiasing</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/Gradient-Experiment-about-textures/">Gradient Experiment about textures</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/2016-4-26/">2016_4_26</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/Get-Edge-And-Subtract/">Get Edge And Subtract</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/Try-to-use-Alpha/">Try to use Alpha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/Feb2528/">Feb25-28</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/02/PianosheetofDeborahsTheme/">Piano sheet of Deborah's Theme</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeMissingNumber/">leetcode Missing Number</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeUglyNumberII/">leetcode Ugly Number II</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/21/TowerofHanoi/">Tower of Hanoi</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/HeapinsertionanddeletioninC/">Heap insertion and deletion in C</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/verybasichashtable/">Very basic hashtable</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Quicksort/">Quicksort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Heapsort/">Heapsort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/DistanceCalculatorGUI/">Distance Calculator GUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/SortListusemergesort/">Sort List use merge sort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/07/Matrixinvert/">Matrix invert</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/06/SimpleNetwork/">Simple Network</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Myfmt/">Myfmt</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/MaximalSquare/">Maximal Square</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/CountCompleteTreeNodes/">Count Complete Tree Nodes</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/31/U6dd8U5b9dU7a0bU5e8fU5458U7684U7ecfU5386/">淘宝程序员的经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/05/U6700U5c0fU5272/">最小割</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/23/U5230U53d1U7ebfU8bbeU8ba1U9057U4f20U7b97U6cd5/">到发线设计遗传算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/06/2048/">2048</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/05/Stackoverflow/">Stackoverflow</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">蚁群算法及其在列车解体顺序编排的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/09/IRST/">IRST</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/03/Minimumdominatingset/">Minimum Dominating Set</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/12/13/ab/">a+b</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/01/U79cb/">秋</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/31/exeprogram/">exe程序捆绑运行的设计实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/27/U6495U626fU81eaU5df1/">撕扯自己</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/06/U796dU5960/">祭奠</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Song Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74687031-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

