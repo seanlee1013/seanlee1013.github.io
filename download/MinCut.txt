@@ -1,0 +1,474 @@
+###Stoer-Wagner###
+
+
+```
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <fstream>
+#include <sstream>
+
+const int MAXV=510;
+const int INF=1000000000;
+
+using namespace std;
+
+int mat[MAXV][MAXV];
+
+int v[MAXV],dis[MAXV];
+bool vis[MAXV];
+
+int minCut(int n) {
+    int i, j, mv, s, t, ans = INF;
+
+    for (i = 0; i < n; ++i) v[i] = i;
+    while (n > 1) {
+        memset(dis, 0, sizeof(dis));
+        memset(vis, 0, sizeof(vis));
+        dis[v[0]] = INF;
+        for (i = 0; i < n; ++i) {
+            mv = -1;
+            for (j = 0; j < n; ++j) {
+                if (!vis[v[j]] && mv < dis[v[j]]) mv = dis[v[t = j]];
+            }
+            if (!mv) return 0;
+            vis[v[t]] = true;
+            for (j = 0; j < n; ++j) {
+                if (!vis[v[j]]) dis[v[j]] += mat[v[t]][v[j]];
+            }
+            if (i < n - 1) s = t;
+            else {
+                ans = min(ans, mv);
+                for (j = 0; j < n; ++j) {
+                    mat[v[j]][v[s]] = (mat[v[s]][v[j]] += mat[v[t]][v[j]]);
+                }
+                v[t] = v[--n];
+            }
+        }
+    }
+    return ans;
+}
+
+int input(){
+    ifstream in;
+    int n = 0;
+    in.open("input.txt");
+    string line;
+    stringstream strstream;
+    int v, e;
+    while (getline(in, line)) {
+        n ++;
+        strstream << line;
+        strstream >> v;
+        while (strstream >> e) {
+            mat[v][e] = 1;
+        }
+        strstream.clear();
+    }
+    in.close();
+    return n;
+}
+
+int main(){
+	int n,m;
+	int t;
+    memset(mat,0,sizeof(mat));
+    n = input();
+    int ans=minCut(n);
+    printf("%d\n",ans);
+	return 0;
+}
+```
+
+###Dinic###
+
+
+```
+/*
+dinic、邻接矩阵
+*/
+#include<iostream>
+#include<queue>
+#include<math.h>
+#include <string.h>
+#include <fstream>
+#include <sstream>
+using namespace std;
+const int maxn=110;
+const int inf=0x7fffffff;
+int map[maxn][maxn];
+int mat[maxn][maxn];
+int level[maxn];
+int s,e,n;
+bool dinic_bfs(){//对顶点标号、找出层次图,点编号从1到n
+	queue<int >q;
+	int i;
+	int u,v;
+	memset(level,0,sizeof(level));
+	q.push(s);
+	level[s]=1;
+	while(!q.empty()){
+		u=q.front();
+		q.pop();
+		for(v=1;v<=n;v++){
+			if(map[u][v]>0&&!level[v]){
+				level[v]=level[u]+1;
+				q.push(v);
+			}
+		}
+	}
+	return level[e]!=0;
+}
+int dinic_dfs(int u,int flow){
+	int v,t;
+	int tmp=flow;
+	if(u==e)return flow;
+	for(v=1;v<=n;v++){
+		if(level[v]==level[u]+1&&map[u][v]>0){
+			t=dinic_dfs(v,min(tmp,map[u][v]));
+			map[u][v]-=t;
+			map[v][u]+=t;
+			tmp-=t;
+		}
+	}
+	return flow-tmp;
+}
+int dinic(int s,int e){
+	int ans=0,tpans=0;
+	while(dinic_bfs()){
+		tpans=dinic_dfs(s,inf);
+		if(!tpans)break;
+		ans+=tpans;
+	}
+	return ans;
+}
+int input(){
+    ifstream in;
+    int n = 0;
+    in.open("input100.txt");
+    string line;
+    stringstream strstream;
+    int v;
+    while (getline(in, line)) {
+        n ++;
+        strstream << line;
+        strstream >> v;
+        while (strstream >> e) {
+            mat[v][e] = 1;
+        }
+        strstream.clear();
+    }
+    in.close();
+    return n;
+}
+int main(){
+	int t;
+    memset(map,0,sizeof(map));
+    n = input();
+    int ans = inf;
+    int temp;
+    s = 0;
+    for(int i = 1;i < n;++ i){
+        memcpy(map,mat,sizeof(mat));
+        e = i;
+        temp = dinic(s,e);
+        //cout << temp << endl;
+        ans = min(ans,temp);
+    }
+    printf("%d\n",ans);
+	return 0;
+}
+
+```
+
+###Karger###
+
+
+```
+#include <stdio.h>
+#include <fstream>
+#include <stdlib.h>
+#include <time.h>
+#include <sstream>
+#include <string>
+#include <iostream>
+
+#define MAX_IT 500
+#define SIZE 1000
+#define inf 0x7fffffff
+
+using namespace std;
+
+struct ENode {
+    int name;
+    struct ENode *next;
+};
+
+struct VNode{
+    int name;
+    struct ENode *first;
+    struct VNode *next;
+};
+
+void InsertENode(int t, int s);//按照标号插入节点，把s节点插入到t后边
+void InsertVnode(int v);//插入一个节点
+void DeleteVnode(int v);//删除一个节点
+VNode *GetVNode(int v);//按照标号获取这个节点
+int GetNumOfEdges(int v);//获取当前标号为v的节点有多少邻接节点
+void DeleteSelfLoop(int v);//操作完成后删除自环
+int GraphContraction();//算法主程序
+void GetRandomEdge(int &v, int &e);//获取随机的边
+
+struct VNode *VnodeList;//每次迭代使用的图
+struct VNode *Start;//原始的输入的图
+int edgeNum;//每次迭代的边数
+int vertexNum;//每次迭代的点数
+
+void InsertENode(int t, int s){//插入单个的节点
+    ENode *enode = new ENode;
+    enode->name = s;
+    enode->next = NULL;//新建一个节点
+    VNode *vnode = GetVNode(t);//获取要插入的母节点的指针
+
+    if(vnode->first == NULL){
+        vnode->first = enode;
+    }else{
+        ENode *cur = vnode->first;
+        while (cur->next != NULL) {
+            cur = cur->next;
+        }
+        cur->next = enode;
+    }
+    edgeNum++;
+}
+
+void InsertENode(VNode *vnode, ENode *enode){
+    if(vnode->first == NULL){
+        vnode->first = enode;
+    }else{
+        ENode *cur = vnode->first;
+        while (cur->next != NULL) {
+            cur = cur->next;
+        }
+        cur->next = enode;
+    }
+}
+
+void input(){//用来做数据输入的
+    ifstream in;
+    in.open("input.txt");
+    string line;
+    stringstream strstream;
+    int v, e;
+    while (getline(in, line)) {
+        strstream << line;
+        strstream >> v;
+        InsertVnode(v);
+        while (strstream >> e) {
+            InsertENode(v,e);
+        }
+        strstream.clear();
+    }
+    in.close();
+    Start = VnodeList;
+    VnodeList = NULL;
+}
+
+void InsertVnode(int v){
+    VNode *vnode = new VNode;
+    vnode->name = v;
+    vnode->next = NULL;
+    vnode->first = NULL;
+    VNode *cur = new VNode;
+    cur = VnodeList;
+    if (cur == NULL) { // insert vnode for the first time
+        VnodeList = vnode;
+    }
+    else { // not the first time
+        while (cur->next != NULL)
+            cur = cur->next;
+        cur->next = vnode;
+    }
+    vertexNum++;
+}
+
+VNode *GetVNode(int v){
+    VNode *res = new VNode;
+    res = VnodeList;
+    while(res->name != v && res->next != NULL) {
+        res = res->next;
+    }
+    if (res->name == v) return res;
+    return NULL;
+}
+
+int GetNumOfEdges(int v){
+    int res = 0;
+    VNode *vnode = new VNode;
+    vnode = GetVNode(v);
+    if(vnode == NULL) return 0;
+    ENode *enode = new ENode;
+    enode = vnode->first;
+    if(enode == NULL) return 0;
+    while(enode->next != NULL){
+        enode = enode->next;
+        res ++;
+    }
+    res ++;
+    return res;
+}
+
+void GetRandomEdge(int &v1,int &v2){
+    int vpos = rand() % vertexNum;
+    VNode *vnode = VnodeList;
+    for (int i = 0; i < vpos;++ i) {
+        vnode = vnode->next;
+    }
+    int N_E = GetNumOfEdges(vnode->name);
+    if(N_E == 0) {//修正无边的点的访问错误
+        v1 = -1;
+        return ;
+    }
+    int epos = rand() % GetNumOfEdges(vnode->name);
+    ENode *enode = vnode->first;
+    for (int i = 0; i < epos;++ i) {
+        enode = enode->next;
+    }
+    v1 = vnode->name;
+    v2 = enode->name;
+}
+
+void UniEnodes(int v1,int v2){//合并两个节点，只需要把要消失的节点后边跟的邻接节点都放在合并后的节点后边就可以了
+    VNode *vnode = GetVNode(v1);
+    VNode *vnode2 = GetVNode(v2);
+    ENode *enode = vnode -> first;
+    if(enode != NULL){
+        InsertENode(vnode2,enode);//直接把节点串接在后边
+    }
+}
+
+void DeleteVNode(int v){//合并后需要删除已经消失了的节点。
+    VNode *cur = new VNode;
+    VNode *pre = new VNode;
+    cur = VnodeList;
+    pre = NULL;
+    int num = 0;
+    while(cur->next != NULL && cur->name != v) {
+        pre = cur;
+        cur = cur->next;
+    }
+    if(cur->name != v) cerr << "No Vnode named " << v << " been found" << endl;
+    else{ // found the vnode named v
+        num = GetNumOfEdges(v);
+        if(pre == NULL) { // if the first vnode
+            VnodeList = cur->next;
+        }
+        else { // if not the first vnode
+            pre->next = cur->next;
+            cur->next = NULL;
+        }
+        vertexNum--;
+        delete []cur;
+    }
+    delete cur;
+}
+
+void RenameENode(int from, int to){//把别的地方指向要消失的节点的都指向新的节点。这里就一个O(e)跪了
+    VNode *vnode;
+    ENode *enode;
+    vnode = VnodeList;
+    while(vnode != NULL){
+        enode = vnode -> first;
+        while(enode != NULL){
+            if(enode -> name == from) enode -> name = to;
+            enode = enode -> next;
+        }
+        vnode = vnode -> next;
+    }
+}
+
+void DeleteSelfLoop(int v){//去掉自环。其实就是在v里边查找同样指向v的，删了就好
+    VNode *vnode = new VNode;
+    vnode = GetVNode(v);
+    ENode *enode = new ENode;
+    ENode *pre = NULL;
+    enode = vnode->first;
+    int epos = 0;
+    do {
+        if (enode->name == v) {
+            enode = enode->next;
+            if(pre == NULL) vnode -> first = enode;
+            else {
+                delete (pre -> next);
+                pre -> next = enode;
+            }
+            edgeNum --;
+        }
+        else {
+            pre = enode;
+            enode = enode->next;
+        }
+    } while (enode != NULL);
+}
+
+void output(){//输出
+    ENode *enode;
+    VNode *vnode;
+    for(vnode = VnodeList; vnode != NULL; vnode = vnode->next) {
+        cout << vnode -> name << " ";
+        for (enode = vnode->first; enode != NULL; enode = enode->next) {
+            cout << enode -> name << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+int Contraction(){
+    while(vertexNum > 2) { // contract edges until vertexNum is 2
+        int v1 = -1, v2;
+        while(v1 == -1)
+            GetRandomEdge(v1, v2);
+        UniEnodes(v1, v2); // 合并节点，v1是要消失的，v2是留下的
+        DeleteVNode(v1); // 删掉v1
+        RenameENode(v1, v2); // 把其它指向v1的节点统统指向v2
+        DeleteSelfLoop(v2); // 删除合并后的自环
+    }
+    return edgeNum;
+}
+
+void init(){//初始化每次迭代
+    edgeNum = 0;
+    vertexNum = 0;
+    ENode *enode;
+    VNode *vnode;
+    delete []VnodeList;
+    VnodeList = NULL;
+    for(vnode = Start; vnode != NULL; vnode = vnode->next) {//用来把Start起始地输入数据放在本次迭代要用的数据的位置
+        InsertVnode(vnode->name);
+        for (enode = vnode->first; enode != NULL; enode = enode->next) {
+            InsertENode(vnode -> name, enode -> name);
+        }
+    }
+    return ;
+}
+
+int main(){
+    srand((unsigned)time(NULL));
+    input();
+    int mincut = inf;
+    int tempres;
+    for(int i = 0;i < MAX_IT;++ i){
+        init();
+        tempres = Contraction();
+        if(tempres < mincut) {
+            mincut = tempres;
+            output();
+            cout << mincut / 2<< endl;
+        }
+    }
+    cout << mincut / 2 << endl;
+    return 0;
+}
+
+```
